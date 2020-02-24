@@ -56,16 +56,22 @@ app.post('/register', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-  
   const candidate = req.body;
-  const user = db.get('users')
-    .tap(x => console.log(x)
-    )
-    .find(user => candidate.username === user.username)
+  const user = db
+    .get('users')
+    .find({
+      username: candidate.username,
+      password: candidate.password
+    })
     .value();
-  console.log(user);
-  
-  res.send(user);
+
+  if (!user) {
+    res.status(400).send({
+      message: 'Invalid credentials'
+    });
+    return;
+  }
+  res.status(200).send(user);
 });
 
 http.listen(3000, () => {
