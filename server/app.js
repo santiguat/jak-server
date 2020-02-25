@@ -7,6 +7,7 @@ const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync(`${__dirname}/db.json`);
 const db = low(adapter);
 const bodyParser = require('body-parser');
+const pwHash = require('password-hash')
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
@@ -50,9 +51,31 @@ app.get('/users', function(req, res) {
 
 app.post('/register', function(req, res) {
   const user = req.body;
+  const hashedPw = pwHash.generate(user.password);
+
+  const isRegistered = 
   db.get('users')
-    .push(user)
+  .find({username: user.username})
+  .value();
+
+  if(isRegistered) {
+    res.status(400).send({
+      message: 'Username is already taken'
+    });
+    return;
+  }
+
+  db.get('users')
+    .push({
+      username: user.username,
+      password: hashedPw
+    })
     .write();
+
+  res.status(200).send({
+    message: 'Registered successfully',
+    code: 200
+  });
 });
 
 app.post('/login', function(req, res) {
@@ -60,12 +83,11 @@ app.post('/login', function(req, res) {
   const user = db
     .get('users')
     .find({
-      username: candidate.username,
-      password: candidate.password
+      username: candidate.username
     })
     .value();
-
-  if (!user) {
+  const pwMatch = pwHash.verify(candidate.password, user.password)
+  if (!user || !pwMatch) {
     res.status(400).send({
       message: 'Invalid credentials'
     });
@@ -74,6 +96,4 @@ app.post('/login', function(req, res) {
   res.status(200).send(user);
 });
 
-http.listen(3000, () => {
-  console.log('server listening to 3000');
-});
+http.listen(3000, '0.0.0.0');

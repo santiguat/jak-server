@@ -2,7 +2,23 @@
   "users": [
     {
       "username": "root",
-      "password": "1234"
+      "password": "sha1$aaffafb8$1$5360fd8f9e1d533dad6f7d9a408f099f0f426900"
+    },
+    {
+      "username": "aaa",
+      "password": "sha1$e4774505$1$3b75ad2e3a177623d83858b49dae5ee480c92775"
+    },
+    {
+      "username": "rooter",
+      "password": "sha1$0b5ac989$1$d7bd2303e122262b4d12046c7169ca6be3be995e"
+    },
+    {
+      "username": "rooterr",
+      "password": "sha1$25c9dfca$1$1d0057df7c650c731f7a77ddcd5df7482d9e8161"
+    },
+    {
+      "username": "caca",
+      "password": "sha1$a9abc161$1$e1c2cb386d2f841839fa8a8cabe1062e78f1c50a"
     }
   ]
 }
