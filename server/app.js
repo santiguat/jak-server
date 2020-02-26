@@ -7,7 +7,7 @@ const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync(`${__dirname}/db.json`);
 const db = low(adapter);
 const bodyParser = require('body-parser');
-const pwHash = require('password-hash')
+const pwHash = require('password-hash');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
@@ -53,12 +53,12 @@ app.post('/register', function(req, res) {
   const user = req.body;
   const hashedPw = pwHash.generate(user.password);
 
-  const isRegistered = 
-  db.get('users')
-  .find({username: user.username})
-  .value();
+  const isRegistered = db
+    .get('users')
+    .find({ username: user.username })
+    .value();
 
-  if(isRegistered) {
+  if (isRegistered) {
     res.status(400).send({
       message: 'Username is already taken'
     });
@@ -86,8 +86,14 @@ app.post('/login', function(req, res) {
       username: candidate.username
     })
     .value();
-  const pwMatch = pwHash.verify(candidate.password, user.password)
-  if (!user || !pwMatch) {
+
+  if(!user) {
+    return;
+  }
+
+  const pwMatch = pwHash.verify(candidate.password, user.password);
+
+  if (!pwMatch) {
     res.status(400).send({
       message: 'Invalid credentials'
     });
