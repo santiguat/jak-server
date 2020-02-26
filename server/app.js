@@ -96,4 +96,5 @@ app.post('/login', function(req, res) {
   res.status(200).send(user);
 });
 
-http.listen(3000, '0.0.0.0');
+http.listen(3000, () => console.log('server listening 3000');
+);
