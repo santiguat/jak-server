@@ -96,4 +96,4 @@ app.post('/login', function(req, res) {
   res.status(200).send(user);
 });
 
-http.listen(process.env.PORT || 3000, () => console.log('server listening 3000'));
+http.listen(process.env.PORT || 3000, () => console.log(process.env.PORT));
