@@ -19,6 +19,10 @@
     {
       "username": "caca",
       "password": "sha1$a9abc161$1$e1c2cb386d2f841839fa8a8cabe1062e78f1c50a"
+    },
+    {
+      "username": "rubenaso",
+      "password": "sha1$373b1bb0$1$c031423dd565846144db61ea5b7cbef3f5c5b9b4"
     }
   ]
 }
