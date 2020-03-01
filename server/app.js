@@ -65,6 +65,8 @@ app.post('/register', function(req, res) {
     return;
   }
 
+
+
   db.get('users')
     .push({
       username: user.username,
@@ -87,13 +89,9 @@ app.post('/login', function(req, res) {
     })
     .value();
 
-  if(!user) {
-    return;
-  }
-
   const pwMatch = pwHash.verify(candidate.password, user.password);
 
-  if (!pwMatch) {
+  if (!pwMatch || !user) {
     res.status(400).send({
       message: 'Invalid credentials'
     });

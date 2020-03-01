@@ -23,6 +23,14 @@
     {
       "username": "rubenaso",
       "password": "sha1$373b1bb0$1$c031423dd565846144db61ea5b7cbef3f5c5b9b4"
+    },
+    {
+      "username": "alberto",
+      "password": "sha1$767bd516$1$ee757840450d3344ecff40978a61247aa9af3f8b"
+    },
+    {
+      "username": "monty",
+      "password": "sha1$1934494e$1$2d8123b38592697cdc0508f09bec67bd747fd40c"
     }
   ]
 }
