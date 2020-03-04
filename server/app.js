@@ -94,7 +94,7 @@ app.post('/login', function(req, res) {
 
   const pwMatch = pwHash.verify(candidate.password, user.password);
 
-  if (!pwMatch) {
+  if (!pwMatch || !user) {
     res.status(400).send({
       message: 'Invalid credentials'
     });
