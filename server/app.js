@@ -116,12 +116,12 @@ app.get('/user/:name', (req, res) => {
     .get('users')
     .find({ username: name })
     .value();
-
+  
   if (!desiredUser) {
     res.status(404).send('User not found');
     return;
   }
-  res.status(200).send(desiredUser);
+  res.status(200).send(desiredUser.username);
 });
 
 http.listen(process.env.PORT || 3000, () =>
