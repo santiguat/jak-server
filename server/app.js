@@ -36,15 +36,16 @@ io.on('connection', function(socket) {
   });
 
   socket.on('add-message', msg => {
-    console.log(msg);
-    msg.time = new Date();
     io.emit('new-message', msg);
+
+    db.get('general-chat')
+      .push(msg)
+      .write();
   });
 });
 
 app.get('/users', function(req, res) {
   const payload = db.get('foo').values();
-  console.log(payload);
 
   res.send({ payload: payload });
 });
@@ -87,7 +88,7 @@ app.post('/login', function(req, res) {
     })
     .value();
 
-  if(!user) {
+  if (!user) {
     return;
   }
 
@@ -102,4 +103,27 @@ app.post('/login', function(req, res) {
   res.status(200).send(user);
 });
 
-http.listen(process.env.PORT || 3000, () => console.log(process.env.PORT));
+app.get('/chat-history', (req, res) => {
+  const chatHistory = db.get('general-chat').value();
+
+  res.status(200).send(chatHistory);
+});
+
+app.get('/user/:name', (req, res) => {
+  const name = req.params.name;
+
+  const desiredUser = db
+    .get('users')
+    .find({ username: name })
+    .value();
+
+  if (!desiredUser) {
+    res.status(404).send('User not found');
+    return;
+  }
+  res.status(200).send(desiredUser);
+});
+
+http.listen(process.env.PORT || 3000, () =>
+  console.log('server listening 3000')
+);
