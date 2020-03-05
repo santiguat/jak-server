@@ -51,9 +51,13 @@ app.get('/users', function(req, res) {
 });
 
 app.post('/register', function(req, res) {
-  const user = req.body;
-  const hashedPw = pwHash.generate(user.password);
-
+  const requestUser = req.body;
+  const hashedPw = pwHash.generate(requestUser.password);
+  user = {
+    username: requestUser.username,
+    passowrd: hashedPw,
+    friends : []
+  }
   const isRegistered = db
     .get('users')
     .find({ username: user.username })
@@ -109,19 +113,33 @@ app.get('/chat-history', (req, res) => {
   res.status(200).send(chatHistory);
 });
 
-app.get('/user/:name', (req, res) => {
-  const name = req.params.name;
-
+app.post('/user', (req, res) => {
+  const usersData = req.body;
+  
   const desiredUser = db
     .get('users')
-    .find({ username: name })
+    .find({ username: usersData.friendName })
     .value();
   
   if (!desiredUser) {
     res.status(404).send('User not found');
     return;
   }
-  res.status(200).send(desiredUser.username);
+  
+  const isAdded = db
+  .get('users')
+  .find({username: usersData.currentUsername})
+  .get('friends')
+  .push(desiredUser.username)
+  .write()
+
+  console.log(isAdded);
+  
+  res.status(200).send({
+    code: 200,
+    data: 'Friend added successfully'
+  })
+
 });
 
 http.listen(process.env.PORT || 3000, () =>
