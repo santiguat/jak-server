@@ -56,8 +56,8 @@ app.post('/register', function(req, res) {
   user = {
     username: requestUser.username,
     passowrd: hashedPw,
-    friends : []
-  }
+    friends: []
+  };
   const isRegistered = db
     .get('users')
     .find({ username: user.username })
@@ -115,31 +115,33 @@ app.get('/chat-history', (req, res) => {
 
 app.post('/user', (req, res) => {
   const usersData = req.body;
-  
+
   const desiredUser = db
     .get('users')
     .find({ username: usersData.friendName })
     .value();
-  
+
   if (!desiredUser) {
     res.status(404).send('User not found');
     return;
   }
-  
-  const isAdded = db
-  .get('users')
-  .find({username: usersData.currentUsername})
-  .get('friends')
-  .push(desiredUser.username)
-  .write()
 
-  console.log(isAdded);
-  
-  res.status(200).send({
-    code: 200,
-    data: 'Friend added successfully'
-  })
-
+  db.get('users')
+    .find({ username: usersData.currentUsername })
+    .get('friends')
+    .thru(friends => {
+      if (friends.includes(desiredUser.username)) {
+        res.status(400).send({
+          code: 400,
+          data: `${desiredUser.username} is already a friend`
+        });
+        return;
+      }
+      res.status(200).send({
+        code: 200,
+        data: 'Friend request has been sent'
+      });
+    });
 });
 
 http.listen(process.env.PORT || 3000, () =>
