@@ -1,3 +1,5 @@
+const { Observable } = require('rxjs');
+// const { } = require('rxjs/operators');
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
@@ -8,6 +10,7 @@ const adapter = new FileSync(`${__dirname}/db.json`);
 const db = low(adapter);
 const bodyParser = require('body-parser');
 const pwHash = require('password-hash');
+const { createNotification, checkNotifications } = require('./notifications');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
@@ -21,13 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-io.on('connection', function(socket) {
-  console.log(`user ${socket.id} connected`);
-  // socket.join(`${socket.id}`, () => {
-  console.log(Object.keys(socket.rooms));
-
-  // });
-
+io.on('connection', socket => {
   socket.on('say to someone', (msg, id) => {
     console.log('messag', msg, id);
 
@@ -44,23 +41,20 @@ io.on('connection', function(socket) {
   });
 });
 
-app.get('/users', function(req, res) {
+app.get('/users', (req, res) => {
   const payload = db.get('foo').values();
 
   res.send({ payload: payload });
 });
 
-app.post('/register', function(req, res) {
-  const requestUser = req.body;
+app.post('/register', (req, res) => {
+  let requestUser = req.body;
   const hashedPw = pwHash.generate(requestUser.password);
-  user = {
-    username: requestUser.username,
-    passowrd: hashedPw,
-    friends: []
-  };
+  requestUser = { ...requestUser, password: hashedPw, friends: [] };
+
   const isRegistered = db
     .get('users')
-    .find({ username: user.username })
+    .find({ username: requestUser.username })
     .value();
 
   if (isRegistered) {
@@ -72,7 +66,7 @@ app.post('/register', function(req, res) {
 
   db.get('users')
     .push({
-      username: user.username,
+      username: requestUser.username,
       password: hashedPw
     })
     .write();
@@ -83,7 +77,7 @@ app.post('/register', function(req, res) {
   });
 });
 
-app.post('/login', function(req, res) {
+app.post('/login', (req, res) => {
   const candidate = req.body;
   const user = db
     .get('users')
@@ -125,10 +119,12 @@ app.post('/user', (req, res) => {
     res.status(404).send('User not found');
     return;
   }
-
+  // checking if desiredUser is already a friend
   db.get('users')
     .find({ username: usersData.currentUsername })
     .get('friends')
+    .tap(friends => console.log(friends)
+    )
     .thru(friends => {
       if (friends.includes(desiredUser.username)) {
         res.status(400).send({
@@ -137,11 +133,35 @@ app.post('/user', (req, res) => {
         });
         return;
       }
+
       res.status(200).send({
         code: 200,
-        data: 'Friend request has been sent'
+        data: desiredUser
       });
     });
+});
+
+// app.post('/friend-request', (req, res) => {
+//   const requestedUser = req.body;
+//   db.get('users')
+//     .find({ username: requestedUser.username })
+//     .get('notifications')
+//     .push({ type: 'friendRequest', content: '' })
+//     .write();
+
+//   createNotification(requestedUser);
+// });
+
+app.get('/notifications/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const pendingNotifications = checkNotifications(userId);
+
+  if (pendingNotifications) {
+    res.status(200).send({
+      status: 200,
+      data: pendingNotifications
+    });
+  }
 });
 
 http.listen(process.env.PORT || 3000, () =>
