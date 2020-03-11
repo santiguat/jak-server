@@ -11,7 +11,7 @@ const db = low(adapter);
 const bodyParser = require('body-parser');
 const pwHash = require('password-hash');
 const { createNotification, checkNotifications } = require('./notifications');
-
+const _ = require('lodash');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use((req, res, next) => {
@@ -123,38 +123,54 @@ app.post('/user', (req, res) => {
   db.get('users')
     .find({ username: usersData.currentUsername })
     .get('friends')
-    .tap(friends => console.log(friends)
-    )
     .thru(friends => {
       if (friends.includes(desiredUser.username)) {
         res.status(400).send({
           code: 400,
           data: `${desiredUser.username} is already a friend`
         });
-        return;
       }
-
-      res.status(200).send({
-        code: 200,
-        data: desiredUser
-      });
     });
+
+  res.status(200).send({
+    code: 200,
+    data: desiredUser
+  });
 });
 
-// app.post('/friend-request', (req, res) => {
-//   const requestedUser = req.body;
-//   db.get('users')
-//     .find({ username: requestedUser.username })
-//     .get('notifications')
-//     .push({ type: 'friendRequest', content: '' })
-//     .write();
+app.post('/friend-request', (req, res) => {
+  const { requestedUser, user } = req.body;
 
-//   createNotification(requestedUser);
-// });
+  const notifications = db
+    .get('users')
+    .find({ username: requestedUser.username })
+    .get('notifications');
+
+  const notification = {
+    type: 'friendRequest',
+    content: user.username
+  };
+
+  if (_.some(notifications.value(), e => _.isMatch(e, notification))) {
+    res.status(400).send({
+      code: 400,
+      data: `Friend request already sent to ${requestedUser.username}`
+    });
+    return notifications;
+  }
+
+  notifications.push({ type: 'friendRequest', content: user.username }).write();
+
+  res.status(200).send({
+    code: 200,
+    data: `Friend request has been sent to ${requestedUser.username}`
+  });
+});
 
 app.get('/notifications/:id', (req, res) => {
   const userId = parseInt(req.params.id);
   const pendingNotifications = checkNotifications(userId);
+  console.log(pendingNotifications);
 
   if (pendingNotifications) {
     res.status(200).send({

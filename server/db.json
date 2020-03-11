@@ -5,39 +5,96 @@
       "username": "root",
       "password": "sha1$aaffafb8$1$5360fd8f9e1d533dad6f7d9a408f099f0f426900",
       "friends": [],
-      "notifications": [{ "type": "friendRequests", "content": "rooter" }]
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "rooter"
+        },
+        {
+          "type": "friendRequest",
+          "content": "admin"
+        }
+      ]
     },
     {
       "id": 2,
       "username": "aaa",
       "password": "sha1$e4774505$1$3b75ad2e3a177623d83858b49dae5ee480c92775",
-      "friends": []
+      "friends": [],
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "root"
+        }
+      ]
     },
     {
       "id": 3,
       "username": "rooter",
       "password": "sha1$0b5ac989$1$d7bd2303e122262b4d12046c7169ca6be3be995e",
-      "friends": []
+      "friends": [],
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "rooter"
+        }
+      ]
     },
     {
       "username": "rooterr",
       "password": "sha1$25c9dfca$1$1d0057df7c650c731f7a77ddcd5df7482d9e8161",
-      "friends": []
+      "friends": [],
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "root"
+        },
+        {
+          "type": "friendRequest",
+          "content": "rooter"
+        }
+      ]
     },
     {
       "username": "caca",
       "password": "sha1$a9abc161$1$e1c2cb386d2f841839fa8a8cabe1062e78f1c50a",
-      "friends": []
+      "friends": [],
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "root"
+        },
+        {
+          "type": "friendRequest",
+          "content": "rooter"
+        }
+      ]
     },
     {
       "username": "rubenaso",
       "password": "sha1$373b1bb0$1$c031423dd565846144db61ea5b7cbef3f5c5b9b4",
-      "friends": []
+      "friends": [],
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "root"
+        }
+      ]
     },
     {
       "username": "admin",
       "password": "sha1$01a3a3ae$1$450ff316783efdefe044aadd4e5c6d91858f205b",
-      "friends": []
+      "friends": [],
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "root"
+        },
+        {
+          "type": "friendRequest",
+          "content": "rooter"
+        }
+      ]
     },
     {
       "username": "test",
