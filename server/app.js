@@ -138,7 +138,7 @@ app.post('/user', (req, res) => {
   });
 });
 
-app.post('/friend-request', (req, res) => {
+app.post('/friend-request-notification', (req, res) => {
   const { requestedUser, user } = req.body;
 
   const notifications = db
@@ -167,10 +167,37 @@ app.post('/friend-request', (req, res) => {
   });
 });
 
+app.post('/friend-request', (req, res) => {
+  const requestData = req.body;
+  const dbUser = db.get('users').find({ username: requestData.username });
+  const friendObject = {
+    name: requestData.username,
+    since: new Date()
+  };
+  dbUser
+    .get('notifications')
+    .filter(notification => notification.content !== requestData.username)
+    .tap(e => console.log(e)
+    )
+    .write();
+
+  if (!requestData.isAccepted) {
+    res.status(200).send({
+      status: 200,
+      content: 'User rejected'
+    });
+  }
+  dbUser.get('friends').push(friendObject).write();
+
+  res.status(200).send({
+    code: 200,
+    content: 'User accepted'
+  });
+});
+
 app.get('/notifications/:id', (req, res) => {
   const userId = parseInt(req.params.id);
   const pendingNotifications = checkNotifications(userId);
-  console.log(pendingNotifications);
 
   if (pendingNotifications) {
     res.status(200).send({

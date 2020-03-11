@@ -32,11 +32,28 @@
       "id": 3,
       "username": "rooter",
       "password": "sha1$0b5ac989$1$d7bd2303e122262b4d12046c7169ca6be3be995e",
-      "friends": [],
+      "friends": [
+        {
+          "name": "rooter",
+          "since": "2020-03-11T19:27:55.972Z"
+        },
+        {
+          "name": "rooter",
+          "since": "2020-03-11T19:28:46.148Z"
+        },
+        {
+          "name": "rooter",
+          "since": "2020-03-11T19:29:47.735Z"
+        }
+      ],
       "notifications": [
         {
           "type": "friendRequest",
           "content": "rooter"
+        },
+        {
+          "type": "friendRequest",
+          "content": "root"
         }
       ]
     },
@@ -101,7 +118,7 @@
       "password": "sha1$6c5e13ba$1$64a1e3269203ff0ce1ae8a6975d146bf0d2c14ac"
     },
     {
-      "username": "shaka",
+      "username": "/friend-requesta",
       "password": "sha1$35f1baed$1$638c6a8db609bd54d8244bcea18137b6e2007e9a"
     },
     {
