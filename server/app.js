@@ -12,6 +12,8 @@ const bodyParser = require('body-parser');
 const pwHash = require('password-hash');
 const { createNotification, checkNotifications } = require('./notifications');
 const _ = require('lodash');
+const privates = require('./privates')
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use((req, res, next) => {
