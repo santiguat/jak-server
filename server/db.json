@@ -4,17 +4,13 @@
       "id": 10,
       "username": "root",
       "password": "sha1$aaffafb8$1$5360fd8f9e1d533dad6f7d9a408f099f0f426900",
-      "friends": [],
-      "notifications": [
+      "friends": [
         {
-          "type": "friendRequest",
-          "content": "rooter"
-        },
-        {
-          "type": "friendRequest",
-          "content": "admin"
+          "name": "rooter",
+          "since": "2020-03-11T23:53:52.912Z"
         }
-      ]
+      ],
+      "notifications": []
     },
     {
       "id": 2,
@@ -34,41 +30,21 @@
       "password": "sha1$0b5ac989$1$d7bd2303e122262b4d12046c7169ca6be3be995e",
       "friends": [
         {
-          "name": "rooter",
-          "since": "2020-03-11T19:27:55.972Z"
-        },
-        {
-          "name": "rooter",
-          "since": "2020-03-11T19:28:46.148Z"
-        },
-        {
-          "name": "rooter",
-          "since": "2020-03-11T19:29:47.735Z"
+          "name": "root",
+          "since": "2020-03-11T23:53:52.911Z"
         }
       ],
-      "notifications": [
-        {
-          "type": "friendRequest",
-          "content": "rooter"
-        },
-        {
-          "type": "friendRequest",
-          "content": "root"
-        }
-      ]
+      "notifications": []
     },
     {
       "username": "rooterr",
       "password": "sha1$25c9dfca$1$1d0057df7c650c731f7a77ddcd5df7482d9e8161",
       "friends": [],
+      "id": 8,
       "notifications": [
         {
           "type": "friendRequest",
           "content": "root"
-        },
-        {
-          "type": "friendRequest",
-          "content": "rooter"
         }
       ]
     },
@@ -102,11 +78,8 @@
       "username": "admin",
       "password": "sha1$01a3a3ae$1$450ff316783efdefe044aadd4e5c6d91858f205b",
       "friends": [],
+      "id": 11,
       "notifications": [
-        {
-          "type": "friendRequest",
-          "content": "root"
-        },
         {
           "type": "friendRequest",
           "content": "rooter"
@@ -128,129 +101,9 @@
   ],
   "general-chat": [
     {
-      "content": "funca?",
-      "username": "root",
-      "date": "2020-02-28T16:41:16.339Z"
-    },
-    {
-      "content": "asa",
-      "username": "root",
-      "date": "2020-02-28T17:06:08.357Z"
-    },
-    {
-      "content": "fd",
-      "username": "root",
-      "date": "2020-02-28T17:07:06.918Z"
-    },
-    {
-      "content": "ja tenemos persistencia xabales",
-      "username": "root",
-      "date": "2020-02-28T17:08:43.862Z"
-    },
-    {
-      "content": "persISTENCIA!",
-      "username": "root",
-      "date": "2020-02-28T17:09:55.058Z"
-    },
-    {
-      "content": "PERSISTENCIA!!!",
-      "username": "root",
-      "date": "2020-02-28T17:10:26.656Z"
-    },
-    {
-      "content": "asa",
-      "username": "root",
-      "date": "2020-02-28T17:11:06.785Z"
-    },
-    {
-      "content": "ghfdghghgf",
-      "username": "root",
-      "date": "2020-02-28T17:11:27.193Z"
-    },
-    {
-      "content": "jkj",
-      "username": "root",
-      "date": "2020-02-28T17:11:31.879Z"
-    },
-    {
-      "content": "yhfghf",
-      "username": "root",
-      "date": "2020-02-28T17:11:43.457Z"
-    },
-    {
-      "content": "",
-      "username": "root",
-      "date": "2020-02-28T17:12:00.351Z"
-    },
-    {
-      "content": null,
-      "username": "root",
-      "date": "2020-02-28T17:12:11.838Z"
-    },
-    {
-      "content": null,
-      "username": "root",
-      "date": "2020-02-28T17:12:25.836Z"
-    },
-    {
-      "content": null,
-      "username": "root",
-      "date": "2020-02-28T17:12:43.994Z"
-    },
-    {
-      "content": "em",
-      "username": "root",
-      "date": "2020-03-02T22:39:02.769Z"
-    },
-    {
-      "content": "ee",
-      "username": "root",
-      "date": "2020-03-02T22:39:07.700Z"
-    },
-    {
-      "content": "hiiit",
-      "username": "root",
-      "date": "2020-03-02T22:39:49.595Z"
-    },
-    {
-      "content": "h",
-      "username": "root",
-      "date": "2020-03-03T22:34:00.629Z"
-    },
-    {
-      "content": "sads",
-      "username": "root",
-      "date": "2020-03-03T22:34:11.886Z"
-    },
-    {
-      "content": "adsadsadsa",
-      "username": "root",
-      "date": "2020-03-03T22:34:24.095Z"
-    },
-    {
-      "content": "asa",
-      "username": "root",
-      "date": "2020-03-09T19:26:50.356Z"
-    },
-    {
-      "content": "sa",
-      "username": "root",
-      "date": "2020-03-09T19:27:15.665Z"
-    },
-    {
-      "content": "sas",
-      "username": "root",
-      "date": "2020-03-09T19:27:20.182Z"
-    },
-    {
-      "content": "asa",
-      "username": "root",
-      "date": "2020-03-09T19:27:34.278Z"
-    },
-    {
-      "content": "qwq",
-      "username": "root",
-      "date": "2020-03-09T19:28:02.967Z"
+      "content": "hola",
+      "username": "rooterr",
+      "date": "2020-03-12T22:25:15.975Z"
     }
   ]
 }

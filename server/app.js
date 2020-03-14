@@ -167,31 +167,35 @@ app.post('/friend-request-notification', (req, res) => {
   });
 });
 
-app.post('/friend-request', (req, res) => {
+app.post('/resolve-friend-request', (req, res) => {
   const requestData = req.body;
-  const dbUser = db.get('users').find({ username: requestData.username });
-  const friendObject = {
-    name: requestData.username,
-    since: new Date()
-  };
-  dbUser
+  const friend = db.get('users').find({ username: requestData.friendName });
+  const user = db.get('users').find({ username: requestData.username });
+
+  user
     .get('notifications')
-    .filter(notification => notification.content !== requestData.username)
-    .tap(e => console.log(e)
-    )
+    .remove({ content: requestData.friendName })
     .write();
 
   if (!requestData.isAccepted) {
     res.status(200).send({
       status: 200,
-      content: 'User rejected'
+      data: 'User rejected'
     });
   }
-  dbUser.get('friends').push(friendObject).write();
+  friend
+    .get('friends')
+    .push({ name: requestData.username, since: new Date() })
+    .write();
+
+  user
+    .get('friends')
+    .push({ name: requestData.friendName, since: new Date() })
+    .write();
 
   res.status(200).send({
-    code: 200,
-    content: 'User accepted'
+    status: 200,
+    data: 'User accepted'
   });
 });
 
@@ -205,6 +209,20 @@ app.get('/notifications/:id', (req, res) => {
       data: pendingNotifications
     });
   }
+});
+
+app.get('/friends/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const friends = db
+    .get('users')
+    .find({ id: userId })
+    .get('friends')
+    .value();
+
+  res.status(200).send({
+    status: 200,
+    data: friends
+  });
 });
 
 http.listen(process.env.PORT || 3000, () =>
