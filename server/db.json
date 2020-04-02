@@ -8,9 +8,18 @@
         {
           "name": "rooter",
           "since": "2020-03-11T23:53:52.912Z"
+        },
+        {
+          "name": "admin",
+          "since": "2020-03-26T13:03:32.645Z"
         }
       ],
-      "notifications": []
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "admin"
+        }
+      ]
     },
     {
       "id": 2,
@@ -77,7 +86,12 @@
     {
       "username": "admin",
       "password": "sha1$01a3a3ae$1$450ff316783efdefe044aadd4e5c6d91858f205b",
-      "friends": [],
+      "friends": [
+        {
+          "name": "root",
+          "since": "2020-03-26T13:03:32.642Z"
+        }
+      ],
       "id": 11,
       "notifications": [
         {

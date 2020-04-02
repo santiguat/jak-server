@@ -204,7 +204,8 @@ app.post('/resolve-friend-request', (req, res) => {
 app.get('/notifications/:id', (req, res) => {
   const userId = parseInt(req.params.id);
   const pendingNotifications = checkNotifications(userId);
-
+  console.log(pendingNotifications);
+  
   if (pendingNotifications) {
     res.status(200).send({
       status: 200,
