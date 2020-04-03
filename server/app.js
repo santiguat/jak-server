@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const pwHash = require('password-hash');
 const { createNotification, checkNotifications } = require('./notifications');
 const _ = require('lodash');
-const privates = require('./privates')
+const privates = require('./privates');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
@@ -182,7 +182,7 @@ app.post('/resolve-friend-request', (req, res) => {
   if (!requestData.isAccepted) {
     res.status(200).send({
       status: 200,
-      data: 'User rejected'
+      data: false
     });
   }
   friend
@@ -197,7 +197,7 @@ app.post('/resolve-friend-request', (req, res) => {
 
   res.status(200).send({
     status: 200,
-    data: 'User accepted'
+    data: true
   });
 });
 

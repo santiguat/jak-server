@@ -10,7 +10,12 @@
           "since": "2020-03-11T23:53:52.912Z"
         }
       ],
-      "notifications": []
+      "notifications": [
+        {
+          "type": "friendRequest",
+          "content": "shak"
+        }
+      ]
     },
     {
       "id": 2,
@@ -83,6 +88,10 @@
         {
           "type": "friendRequest",
           "content": "rooter"
+        },
+        {
+          "type": "friendRequest",
+          "content": "root"
         }
       ]
     },
@@ -97,6 +106,10 @@
     {
       "username": "ds",
       "password": "sha1$0ab5dd4e$1$a383579006ee0e6f324f0eebf91f1df5bac51e6f"
+    },
+    {
+      "username": "shak",
+      "password": "sha1$49a0d782$1$fbc379d5f60c08b58cec4a90923803b02bc58c69"
     }
   ],
   "general-chat": [
