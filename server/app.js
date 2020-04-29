@@ -184,6 +184,7 @@ app.post('/resolve-friend-request', (req, res) => {
       status: 200,
       data: false
     });
+    return;
   }
   friend
     .get('friends')
@@ -195,7 +196,7 @@ app.post('/resolve-friend-request', (req, res) => {
     .push({ name: requestData.friendName, since: new Date() })
     .write();
 
-  res.status(200).send({
+  res.send({
     status: 200,
     data: true
   });
@@ -204,8 +205,7 @@ app.post('/resolve-friend-request', (req, res) => {
 app.get('/notifications/:id', (req, res) => {
   const userId = parseInt(req.params.id);
   const pendingNotifications = checkNotifications(userId);
-  console.log(pendingNotifications);
-  
+
   if (pendingNotifications) {
     res.status(200).send({
       status: 200,
