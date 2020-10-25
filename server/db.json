@@ -34,15 +34,15 @@
       "password": "sha1$0b5ac989$1$d7bd2303e122262b4d12046c7169ca6be3be995e",
       "friends": [
         {
-          "name": "rooter",
+          "username": "rooter",
           "since": "2020-03-11T19:27:55.972Z"
         },
         {
-          "name": "rooter",
+          "username": "rooter",
           "since": "2020-03-11T19:28:46.148Z"
         },
         {
-          "name": "rooter",
+          "username": "rooter",
           "since": "2020-03-11T19:29:47.735Z"
         }
       ],
@@ -126,7 +126,7 @@
       "password": "sha1$0ab5dd4e$1$a383579006ee0e6f324f0eebf91f1df5bac51e6f"
     }
   ],
-  "general-chat": [
+  "generalChat": [
     {
       "content": "funca?",
       "username": "root",
