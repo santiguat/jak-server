@@ -1,5 +1,5 @@
 {
-  "watch": ["server/app.ts"],
+  "watch": ["server/server.ts", "server/app.ts", "server/chat/socket.ts"],
   "ignore": ["src/**/*.spec.ts", "server/db.json"],
-  "exec": "npx ts-node server/app.ts"
+  "exec": "npx ts-node server/server.ts"
 }

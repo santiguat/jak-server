@@ -1,8 +1,8 @@
-import userModel from '../models/user.model';
+import { UserModel } from '../models/user.model';
 
-export const findOne = <T>(param: T, callback?: (res: any) => void): T => {
+export const findOne = <T>(filter: T, callback?: (res: any) => void): T => {
   let result: T;
-  userModel.findOne(param, (err, res: T) => {
+  UserModel.findOne(filter, (err, res: T) => {
     if (err) {
       console.log(err);
       return;
