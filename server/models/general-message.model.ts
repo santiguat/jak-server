@@ -7,12 +7,9 @@ export interface GeneralMessage extends Document {
 }
 
 const GeneralMessageSchema: Schema = new Schema({
-  content: { type: String, unique: true, required: true },
   username: { type: String, required: true },
+  content: { type: String, unique: true, required: true },
   date: Date,
 });
 
-export const GeneralMessageModel = model<GeneralMessage>(
-  'GeneralMessage',
-  GeneralMessageSchema
-);
+export const GeneralMessageModel = model<GeneralMessage>('GeneralMessage', GeneralMessageSchema);

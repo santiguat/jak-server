@@ -2,7 +2,6 @@ import { Schema, model, Document } from 'mongoose'
 import { User } from './user.model'
 
 export interface Notification extends Document {
-  type: NotificationType
   sender: User['_id']
   receiver: User['_id']
   message: String
@@ -10,7 +9,7 @@ export interface Notification extends Document {
     readerId: User['_id']
     reader_at: Date
   }
-  creation_date: { type: Date; default: Date }
+  creation_date: Date
 }
 
 const NotificationSchema = new Schema({
@@ -26,7 +25,4 @@ const NotificationSchema = new Schema({
   created_at: { type: Date, default: Date.now },
 })
 
-export const NotificationModel = model<Notification>(
-  'Notification',
-  NotificationSchema
-)
+export const NotificationModel = model<Notification>('Notification', NotificationSchema)
